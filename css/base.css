@@ -1,0 +1,280 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+:root {
+	font-size: 15px;
+	--color-text: #a6a6ab;
+	--color-bg: #030014;
+	--color-link: rgb(142, 100, 255);
+	--color-link-hover: rgb(249, 38, 114);
+}
+
+body {
+	margin: 0;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	font-family: "neue-haas-grotesk-text",-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Page Loader */
+.js .loading::before,
+.js .loading::after {
+	content: '';
+	position: fixed;
+	z-index: 1000;
+}
+
+.js .loading::before {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-bg);
+}
+
+.js .loading::after {
+	top: 50%;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin: -30px 0 0 -30px;
+	border-radius: 50%;
+	opacity: 0.4;
+	background: var(--color-link);
+	animation: loaderAnim 0.7s linear infinite alternate forwards;
+
+}
+
+@keyframes loaderAnim {
+	to {
+		opacity: 1;
+		transform: scale3d(0.5,0.5,1);
+	}
+}
+
+a {
+	text-decoration: none;
+	color: var(--color-link);
+	outline: none;
+	cursor: pointer;
+}
+
+a:hover {
+	color: var(--color-link-hover);
+	outline: none;
+}
+
+/* Better focus styles from https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
+a:focus {
+	/* Provide a fallback style for browsers
+	 that don't support :focus-visible */
+	outline: none;
+	background: lightgrey;
+}
+
+a:focus:not(:focus-visible) {
+	/* Remove the focus indicator on mouse-focus for browsers
+	 that do support :focus-visible */
+	background: transparent;
+}
+
+a:focus-visible {
+	/* Draw a very noticeable focus style for
+	 keyboard-focus on browsers that do support
+	 :focus-visible */
+	outline: 2px solid red;
+	background: transparent;
+}
+
+.unbutton {
+	background: none;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
+.unbutton:focus {
+	outline: none;
+}
+
+main {
+	max-width: 1400px;
+	padding: 4rem 2rem;
+	margin: 0 auto;
+}
+
+.frame {
+	z-index: 1000;
+	position: relative;
+	width: 100%;
+	max-width: 1300px;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-areas: 'title' 'back' 'prev' 'sponsor';
+	grid-gap: 1rem;
+	justify-items: start;
+	align-self: start;
+	justify-self: start;
+	pointer-events: none;
+	align-items: center;
+}
+
+body #cdawrap {
+    justify-self: start;
+}
+
+.frame a {
+	pointer-events: auto;
+}
+
+.frame a:not(.frame__title-back) {
+	white-space: nowrap;
+	overflow: hidden;
+	position: relative;
+}
+
+.frame a:not(.frame__title-back)::before {
+	content: '';
+	height: 1px;
+	width: 100%;
+	background: currentColor;
+	position: absolute;
+	top: 90%;
+	transition: transform 0.3s;
+	transform-origin: 0% 50%;
+}
+
+.frame a:not(.frame__title-back):hover::before {
+	transform: scaleX(0);
+	transform-origin: 100% 50%;
+}
+
+.frame__title {
+	grid-area: title;
+	font-size: 1.25rem;
+	margin: 0;
+	font-weight: 400;
+}
+
+.frame__back {
+	grid-area: back;
+}
+
+.frame__prev {
+	grid-area: prev;
+}
+
+.frame__demos {
+	grid-area: demos;
+	display: flex;
+	gap: 1rem;
+}
+
+.grid {
+	display: grid;
+	margin: 10vh 0;
+	grid-template-columns: 1fr;
+	border: 1px solid #2a2b3a;
+	background: #2a2b3a;
+	gap: 1px;
+}
+
+.grid__item {
+	padding: 1.5rem 1.5rem 2rem;
+	display: grid;
+	gap: 1.5rem;
+	background: var(--color-bg);
+	align-content: start;
+	grid-template-rows: auto 1fr auto;
+}
+
+.grid__item-img {
+	width: 100%;
+	aspect-ratio: 1;
+	border-radius: 1.6rem;
+	position: relative;
+	overflow: hidden;
+	display: grid;
+	place-items: center;
+	--x: 0px; 
+	--y: 0px;
+}
+
+.grid__item-img::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(rgb(23, 24, 37) 40%, rgb(102, 51, 238) 50%, rgb(142, 100, 255), rgb(249, 38, 114));
+	mix-blend-mode: darken;
+}
+
+.grid__item-img-deco {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	font-family: "input-mono", monospace;
+	font-size: 0.85rem;
+	word-wrap: break-word;
+	line-height: 1.15;
+	color: #fff;
+	opacity: 0;
+	-webkit-mask-image: radial-gradient(300px circle at var(--x) var(--y),black 20%,rgba(0,0,0,0.25),transparent);
+	mask-image: radial-gradient(300px circle at var(--x) var(--y),black 20%,rgba(0,0,0,0.25),transparent);
+}
+
+.grid__item-img svg {
+	width: 75%;
+	max-width: 180px;
+	position: relative;
+	z-index: 1;
+}
+
+.grid__item-label {
+	line-height: 1.4;
+	margin: 0;
+}
+
+.grid__item-tag {
+	align-self: end;
+	justify-self: start;
+	border: 1px solid #2a2b3a;
+	border-radius: 1em;
+	line-height: 0.75;
+	padding: 0.5rem 0.75rem;
+	font-size: 0.85rem;
+}
+
+@media screen and (min-width: 33em) {
+	.grid {
+		grid-template-columns: repeat(2,1fr);
+	}
+}
+
+@media screen and (min-width: 53em) {
+	.frame {
+		grid-template-columns: auto 1fr 1fr;
+		grid-template-rows: auto auto auto;
+		grid-template-areas: 'title title sponsor' 'back prev ...';
+		align-content: space-between;
+		justify-items: start;
+		grid-row-gap: 1.5rem;
+	}
+	.grid {
+		grid-template-columns: repeat(3,1fr);
+	}
+	body #cdawrap {
+	    justify-self: end;
+	}
+}
