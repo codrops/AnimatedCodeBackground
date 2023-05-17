@@ -2,7 +2,7 @@
 
 A recreation of the hover effect seen on the customer grid from the [Evervault](https://evervault.com/customers) website.
 
-![Image Title](https://generative-placeholders.glitch.me/image?width=800&height=600")
+![Gradient Hover](https://tympanus.net/codrops/wp-content/uploads/2023/05/gradientmask.jpg)
 
 [Article on Codrops](https://tympanus.net/codrops/?p=72017)
 
