@@ -1,26 +1,13 @@
-// Linear interpolation
-const lerp = (a, b, n) => (1 - n) * a + n * b;
+// The characters a random string is made of
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-// Gets the mouse position
-const getMousePos = e => {
-    return { 
-        x : e.clientX, 
-        y : e.clientY 
-    };
-};
+// Picks one of the characters at random
+const getRandomCharacter = gsap.utils.random([...characters], true);
 
 // This function generates a random string of a given length
-const getRandomString = length => {
-    let result = '';
-    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
-};
+const getRandomString = length => Array.from({ length }, getRandomCharacter).join('');
 
-export { 
-    lerp, 
-    getMousePos,
+export {
+    characters,
     getRandomString,
 };
