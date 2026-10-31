@@ -1,5 +1,5 @@
 import { initCards } from './codeCards.js';
-import { WrapField } from './fields/wrapField.js';
+import { RegisterField } from './fields/registerField.js';
 
-// Variation 6: wrap
-initCards(WrapField);
+// Variation 6: misregister
+initCards(RegisterField);

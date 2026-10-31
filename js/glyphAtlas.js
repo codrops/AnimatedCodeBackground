@@ -7,15 +7,19 @@ const allCharacters = characters + punctuation;
 // Draws every character the code is made of into a grid on a canvas,
 // one cell each, at the size of a character cell on screen
 // (in device pixels, so the code stays sharp)
-const createGlyphAtlas = ({ fontFamily, fontSize, lineHeight }) => {
+const createGlyphAtlas = ({ fontFamily, fontSize, lineHeight, narrowCells = false }) => {
     const dpr = Math.min(window.devicePixelRatio, 2);
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const font = `${fontSize * dpr}px ${fontFamily}`;
 
-    // One character cell on screen
+    // One character cell on screen. The code's font isn't monospaced,
+    // so a cell is as wide as the widest character, and none is cut off.
+    // Narrow cells are as wide as a '0' instead, and the characters
+    // wider than that are drawn condensed to fit
     ctx.font = font;
-    const cellWidth = Math.round(ctx.measureText('0').width);
+    const widths = [...allCharacters].map(character => ctx.measureText(character).width);
+    const cellWidth = Math.ceil(narrowCells ? ctx.measureText('0').width : Math.max(...widths));
     const cellHeight = Math.round(lineHeight * dpr);
     // Room around each cell, so the smaller mipmaps
     // don't bleed into the neighbouring characters
@@ -34,8 +38,10 @@ const createGlyphAtlas = ({ fontFamily, fontSize, lineHeight }) => {
     [...allCharacters].forEach((character, i) => {
         const x = (i % columns + 0.5) * (cellWidth + padding * 2);
         const y = (Math.floor(i / columns) + 0.5) * (cellHeight + padding * 2);
-        ctx.fillText(character, x, y);
+        ctx.setTransform(Math.min(1, cellWidth / widths[i]), 0, 0, 1, x, y);
+        ctx.fillText(character, 0, 0);
     });
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
 
     // How much ink each character has: the sum of its cell's alpha
     const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;

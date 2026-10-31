@@ -136,7 +136,10 @@ class CodeField {
         linger: 0,
         fadeOut: 0.6,
         // how long a tap on a touch screen holds the effect
-        tapHold: 1
+        tapHold: 1,
+        // cells as wide as a '0', with wider characters condensed to fit,
+        // instead of as wide as the widest character (see glyphAtlas.js)
+        narrowCells: false
     };
     // the card, its canvas and the WebGL2 context
     el;

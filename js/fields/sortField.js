@@ -1,6 +1,6 @@
 import { glsl, CodeField } from '../codeField.js';
 
-// Variation 9, sort: near the pointer, each column of code sorts itself by how
+// Variation 8, sort: near the pointer, each column of code sorts itself by how
 // much ink its characters have, a few swaps at a time, so a gradient from light
 // letters to heavy ones forms around the pointer. Once it has moved on, random
 // swaps shuffle the code back

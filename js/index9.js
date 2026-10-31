@@ -1,5 +1,5 @@
 import { initCards } from './codeCards.js';
-import { SortField } from './fields/sortField.js';
+import { TypingField } from './fields/typingField.js';
 
-// Variation 9: sort
-initCards(SortField);
+// Variation 9: typing
+initCards(TypingField);

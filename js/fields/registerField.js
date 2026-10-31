@@ -1,6 +1,6 @@
 import { glsl, CodeField } from '../codeField.js';
 
-// Variation 7, misregister: the code is printed in two inks, pink and lilac.
+// Variation 6, misregister: the code is printed in two inks, pink and lilac.
 // Moving the pointer pulls them out of register, along the movement, and they
 // spring back into place when it rests, like a two-colour print
 

@@ -17,13 +17,12 @@ A recreation of the hover effect seen on the customer grid from the [Evervault](
 | 03 | `index3.html`  | Decrypt: near the pointer, scrambled code flickers like a decoder and locks into the card's own text. |
 | 04 | `index4.html`  | Typeset: loose characters drift around the pointer and spring into line as it comes near. |
 | 05 | `index5.html`  | Data stream: rows of code stream sideways; near the pointer they brake to be read, and moving drags them along. |
-| 06 | `index6.html`  | Text wrap: the code reflows around the pointer like text around a shape, its lines parting and closing again. |
-| 07 | `index7.html`  | Misregister: pink and lilac inks print the code; moving pulls them out of register, and rest brings them back. |
-| 08 | `index8.html`  | Knockout: the pointer flips the code into blocks of colour with the characters cut out, then they flip back. |
-| 09 | `index9.html`  | Sort: near the pointer, each column of code sorts itself by ink weight, then shuffles back. |
-| 10 | `index10.html` | Typing: the pointer is a caret that types code where it rests, line by line; old lines cool and fade. |
+| 06 | `index6.html`  | Misregister: pink and lilac inks print the code; moving pulls them out of register, and rest brings them back. |
+| 07 | `index7.html`  | Knockout: the pointer flips the code into blocks of colour with the characters cut out, then they flip back. |
+| 08 | `index8.html`  | Sort: near the pointer, each column of code sorts itself by ink weight, then shuffles back. |
+| 09 | `index9.html`  | Typing: the pointer is a caret that types code where it rests, line by line; old lines cool and fade. |
 
-Variations 02 to 10 are drawn with WebGL2. With reduced motion, or without WebGL2, they fall back to the first variation's hover.
+Variations 02 to 09 are drawn with WebGL2. With reduced motion, or without WebGL2, they fall back to the first variation's hover.
 
 ## Installation
 
@@ -33,7 +32,7 @@ Run this demo on a [local server](https://developer.mozilla.org/en-US/docs/Learn
 
 - Logo placeholders from [Logoipsum](https://logoipsum.com/)
 - Animated with [GSAP](https://gsap.com)
-- Fonts: Neue Haas Grotesk Text and Input Mono from [Adobe Fonts](https://fonts.adobe.com)
+- Font: [Host Grotesk](https://fonts.google.com/specimen/Host+Grotesk) from Google Fonts
 
 ## Misc
 

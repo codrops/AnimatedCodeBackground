@@ -21,7 +21,8 @@ const initCards = Field => {
         const atlas = createGlyphAtlas({
             fontFamily: style.fontFamily,
             fontSize: parseFloat(style.fontSize),
-            lineHeight: parseFloat(style.lineHeight)
+            lineHeight: parseFloat(style.lineHeight),
+            narrowCells: Field.settings.narrowCells
         });
 
         cards.forEach(img => {

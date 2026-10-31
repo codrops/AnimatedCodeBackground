@@ -1,5 +1,5 @@
 import { initCards } from './codeCards.js';
-import { KnockoutField } from './fields/knockoutField.js';
+import { SortField } from './fields/sortField.js';
 
-// Variation 8: knockout
-initCards(KnockoutField);
+// Variation 8: sort
+initCards(SortField);

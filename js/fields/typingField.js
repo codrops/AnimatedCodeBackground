@@ -1,6 +1,6 @@
 import { glsl, CodeField } from '../codeField.js';
 
-// Variation 10, typing: the pointer is a caret that types code where it rests,
+// Variation 9, typing: the pointer is a caret that types code where it rests,
 // line by line. Fresh characters are white and cool to purple as they age,
 // then fade; moving the pointer starts a new paragraph there
 
@@ -61,7 +61,9 @@ export class TypingField extends CodeField {
         // the code fades with its age after the pointer leaves
         linger: 3,
         fadeOut: 0.5,
-        tapHold: 1.5
+        tapHold: 1.5,
+        // typed code reads as text, not spaced-out letters
+        narrowCells: true
     };
     // when each cell was typed
     times;

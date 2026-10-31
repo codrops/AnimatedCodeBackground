@@ -7,17 +7,25 @@
 :root {
 	/* 15px at the browser default, still scales with the visitor's font size setting */
 	font-size: 93.75%;
-	--color-text: #a6a6ab;
-	--color-bg: #030014;
-	--color-link: rgb(142, 100, 255);
-	--color-link-hover: rgb(249, 38, 114);
+	--color-text: rgb(255 255 255 / 55%);
+	--color-title: #dadada;
+	--color-bg: #000;
+	--color-line: rgb(255 255 255 / 12%);
+	--color-link: rgb(255 255 255 / 55%);
+	--color-link-hover: #fff;
+	--font: 'Host Grotesk', sans-serif;
 }
 
 body {
 	margin: 0;
 	color: var(--color-text);
 	background-color: var(--color-bg);
-	font-family: "neue-haas-grotesk-text",-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+	font-family: var(--font);
+	/* 14.5px for all the text, the title too */
+	font-size: 0.9667rem;
+	/* Stacked short lines nearly touch */
+	line-height: 0.8;
+	letter-spacing: -0.01em;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -33,7 +41,7 @@ a:hover {
 }
 
 a:focus-visible {
-	outline: 2px solid red;
+	outline: 2px solid var(--color-link);
 }
 
 main {
@@ -49,7 +57,7 @@ main {
 	max-width: 1300px;
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-areas: 'title' 'links' 'demos' 'tags' 'sponsor';
+	grid-template-areas: 'title' 'demos' 'links' 'tags' 'sponsor';
 	gap: 1rem;
 	justify-items: start;
 	pointer-events: none;
@@ -63,29 +71,12 @@ body #cdawrap {
 .frame a {
 	pointer-events: auto;
 	white-space: nowrap;
-	overflow: hidden;
-	position: relative;
-}
-
-.frame a::before {
-	content: '';
-	height: 1px;
-	width: 100%;
-	background: currentColor;
-	position: absolute;
-	top: 90%;
-	transition: transform 0.3s;
-	transform-origin: 0% 50%;
-}
-
-.frame a:hover::before {
-	transform: scaleX(0);
-	transform-origin: 100% 50%;
 }
 
 .frame__title {
 	grid-area: title;
-	font-size: 1.25rem;
+	font-size: inherit;
+	color: var(--color-title);
 	margin: 0;
 	font-weight: 400;
 }
@@ -105,13 +96,53 @@ body #cdawrap {
 	grid-area: tags;
 }
 
+/* The variations in a box of their own, so they can't be missed */
 .frame__demos {
 	grid-area: demos;
 	display: grid;
 	grid-template-columns: auto repeat(5, auto);
 	justify-content: start;
-	gap: 0.25rem 0.85rem;
+	align-items: center;
+	gap: 0.5rem 0.85rem;
+	padding: 0.6667rem 0.9333rem;
+	/* In the colours of the cards' code, softened: purple, lilac and pink (glsl.palette in js/codeField.js),
+	   around the box and slowly turning */
+	--demos-border: conic-gradient(from var(--demos-angle, 0deg), rgb(102 51 238 / 50%), rgb(142 100 255 / 50%), rgb(249 38 114 / 50%), rgb(102 51 238 / 50%));
+	position: relative;
+	border: 1px solid;
+	border-image: var(--demos-border) 1;
 	font-variant-numeric: tabular-nums;
+	animation: demos-border 8s linear infinite;
+}
+
+/* Registered, so the angle can be animated */
+@property --demos-angle {
+	syntax: '<angle>';
+	inherits: true;
+	initial-value: 0deg;
+}
+
+@keyframes demos-border {
+	to {
+		--demos-angle: 360deg;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.frame__demos {
+		animation: none;
+	}
+}
+
+/* A blurred copy of the border, so its edge looks soft */
+.frame__demos::before {
+	content: '';
+	position: absolute;
+	inset: -1px;
+	border: 1px solid;
+	border-image: var(--demos-border) 1;
+	filter: blur(3px);
+	pointer-events: none;
 }
 
 .frame__demos-label {
@@ -125,15 +156,21 @@ body #cdawrap {
 }
 
 .frame__demo--current {
-	color: #fff;
+	/* Filled in, without changing the row's height or the numbers' spacing */
+	margin: -0.2rem -0.3rem;
+	padding: 0.2rem 0.3rem;
+	background: #fff;
+	color: #000;
 }
 
 .grid {
 	display: grid;
 	margin: 10vh 0;
 	grid-template-columns: 1fr;
-	border: 1px solid #2a2b3a;
-	background: #2a2b3a;
+	border: 1px solid var(--color-line);
+	background: var(--color-line);
+	/* The lines are see-through: without this, the background shows under the border too and doubles it */
+	background-clip: padding-box;
 	gap: 1px;
 }
 
@@ -169,10 +206,10 @@ body #cdawrap {
 .grid__item-img-deco {
 	position: absolute;
 	inset: 0;
-	font-family: "input-mono", monospace;
 	font-size: 0.85rem;
 	overflow-wrap: break-word;
 	line-height: 1.15;
+	letter-spacing: 0;
 	color: #fff;
 	opacity: 0;
 	mask-image: radial-gradient(300px circle at var(--x) var(--y),black 20%,rgba(0,0,0,0.25),transparent);
@@ -200,18 +237,25 @@ body #cdawrap {
 }
 
 .grid__item-label {
-	line-height: 1.4;
+	/* Can run to two lines, which need room */
+	line-height: 1.2;
 	margin: 0;
 }
 
 .grid__item-tag {
 	align-self: end;
 	justify-self: start;
-	border: 1px solid #2a2b3a;
-	border-radius: 1em;
-	line-height: 0.75;
-	padding: 0.5rem 0.75rem;
-	font-size: 0.85rem;
+	border: 1px solid rgb(255 255 255 / 20%);
+	padding: 0 0.4rem;
+	line-height: 1.2;
+}
+
+/* Trims the line box to the capitals, so the padding sits evenly around them */
+@supports (text-box: trim-both cap alphabetic) {
+	.grid__item-tag {
+		padding: 0.3333rem 0.4rem;
+		text-box: trim-both cap alphabetic;
+	}
 }
 
 @media screen and (min-width: 33em) {
@@ -221,25 +265,21 @@ body #cdawrap {
 }
 
 @media screen and (min-width: 53em) {
+	/* The title on its own line, leaving the top right free for the sponsor; the variations under it, then the links and tags */
 	.frame {
-		grid-template-columns: auto 1fr auto;
-		grid-template-rows: auto auto auto;
-		grid-template-areas: 'title title sponsor' 'links demos tags';
-		justify-items: start;
-		row-gap: 1.5rem;
+		grid-template-columns: auto auto 1fr auto;
+		grid-template-areas: 'title title title sponsor' 'demos demos demos .' 'links tags . .';
+		column-gap: 2.1333rem;
+		align-items: start;
 	}
 	.frame__demos {
-		justify-self: center;
-		grid-template-columns: auto repeat(10, auto);
+		grid-template-columns: auto repeat(9, auto);
 	}
 	.frame__demo:nth-child(5n + 2) {
 		grid-column-start: auto;
 	}
-	.frame__demo:nth-child(10n + 2) {
+	.frame__demo:nth-child(9n + 2) {
 		grid-column-start: 2;
-	}
-	.frame__tags {
-		justify-self: end;
 	}
 	.grid {
 		grid-template-columns: repeat(3,1fr);

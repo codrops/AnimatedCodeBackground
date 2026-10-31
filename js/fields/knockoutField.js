@@ -1,6 +1,6 @@
 import { glsl, CodeField } from '../codeField.js';
 
-// Variation 8, knockout: the pointer flips the code into solid blocks of colour
+// Variation 7, knockout: the pointer flips the code into solid blocks of colour
 // with the characters cut out of them, reversed type that trails behind it and
 // flips back, cell by cell, once it has passed
 

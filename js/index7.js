@@ -1,5 +1,5 @@
 import { initCards } from './codeCards.js';
-import { RegisterField } from './fields/registerField.js';
+import { KnockoutField } from './fields/knockoutField.js';
 
-// Variation 7: misregister
-initCards(RegisterField);
+// Variation 7: knockout
+initCards(KnockoutField);
