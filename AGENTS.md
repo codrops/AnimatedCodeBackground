@@ -8,7 +8,7 @@ Notes for coding agents working on this repo. Read [README.md](README.md) first 
 - Serve the root with any static server (`npx serve .` or `python3 -m http.server`). ES modules don't load from `file://`.
 - GSAP is vendored in `js/gsap.min.js` and loaded as a classic script before the module, so `gsap` is a global. Don't import it.
 - Variations 2 to 9 use raw WebGL2 (no three.js). Each one's shaders are in its file in `js/fields/`.
-- One font, Host Grotesk, from the Google Fonts stylesheet linked in every page: all the page's text at one small size, and the cards' characters. It isn't monospaced, so the glyph atlas makes every character cell as wide as the widest character; a field with `narrowCells` in its settings (variation 9) gets cells as wide as a '0' instead, with wider characters condensed to fit.
+- One font, Host Grotesk, in `fonts/` with its licence (SIL OFL 1.1): all the page's text at one small size, and the cards' characters. Every page preloads it and `css/base.css` declares it with `font-display: block`, so the text is drawn once, already in it, and nothing shifts when it loads. It isn't monospaced, so the glyph atlas makes every character cell as wide as the widest character; a field with `narrowCells` in its settings (variation 9) gets cells as wide as a '0' instead, with wider characters condensed to fit.
 - There are no automated tests. Check a change in a browser on every page: hover each card, move around inside it and out again, rest the pointer, scroll with the pointer over a card, resize the window, and look at the console. Tap a card on a touch screen (or in a phone emulator), and try it with reduced motion turned on.
 
 ## Map
@@ -26,7 +26,8 @@ Notes for coding agents working on this repo. Read [README.md](README.md) first 
 | `js/glyphAtlas.js`         | Draws the characters into a grid on a canvas, at the cards' font size in device pixels: the random ones, then the punctuation the cards' text needs. |
 | `js/utils.js`              | The character set and `getRandomString`, built on `gsap.utils.random`.                             |
 | `js/gsap.min.js`           | GSAP 3, vendored.                                                                                  |
-| `css/base.css`             | All styles, including the frame, the variations nav, the grid and the mask that makes variation 1. The page's colours and both fonts are custom properties on `:root`. |
+| `css/base.css`             | All styles, including the font, the frame, the variations nav, the grid and the mask that makes variation 1. The page's colours and font are custom properties on `:root`. |
+| `fonts/`                   | Host Grotesk (`HostGrotesk-Regular.woff2`) and its licence.                                        |
 
 ## How a card works
 

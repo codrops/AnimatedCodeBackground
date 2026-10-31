@@ -32,7 +32,7 @@ Run this demo on a [local server](https://developer.mozilla.org/en-US/docs/Learn
 
 - Logo placeholders from [Logoipsum](https://logoipsum.com/)
 - Animated with [GSAP](https://gsap.com)
-- Font: [Host Grotesk](https://fonts.google.com/specimen/Host+Grotesk) from Google Fonts
+- Font: [Host Grotesk](https://github.com/Element-Type/HostGrotesk) by Element Type (SIL Open Font License 1.1, see `fonts/OFL-HostGrotesk.txt`)
 
 ## Misc
 

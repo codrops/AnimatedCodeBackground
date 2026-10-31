@@ -1,3 +1,13 @@
+/* Host Grotesk by Element Type, SIL Open Font License 1.1 — see fonts/OFL-HostGrotesk.txt.
+   Every page preloads it, and the text waits for it (font-display: block), so it's drawn once, in this font */
+@font-face {
+	font-family: 'Host Grotesk';
+	src: url('../fonts/HostGrotesk-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: block;
+}
+
 *,
 *::after,
 *::before {
